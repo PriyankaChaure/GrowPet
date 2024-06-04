@@ -1,0 +1,190 @@
+﻿@model StoreAddVM
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scsale=1, shrink-to-fit=no">
+    <title>GrowPet Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/adminbackend/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/adminbackend/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <link rel="stylesheet" href="~/adminbackend/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/adminbackend/images/favicon.ico" />
+    <script src="~/jquery/jquery.js"></script>
+</head>
+<body>
+
+
+    <div class="container-scroller">
+
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+
+            <div class="content-wrapper d-flex align-items-center auth">
+                <div class="row flex-grow">
+                    <div class="col-lg-4 mx-auto">
+
+                        <div class="auth-form-light text-left p-5">
+                            <div class="brand-logo">
+                                <img src="~/adminbackend/images/logo.PNG">
+                            </div>
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <h4>Hello! let's get started</h4>
+                            <h6 class="font-weight-light">Sign up to continue.</h6>
+                            <form class="pt-3" asp-action="SignUp" method="post">
+                                
+                                <div class="form-group">
+                                    <label>Store Name</label>
+                                    <input asp-for="StoreName" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="StoreName">
+                                    <span asp-validation-for="StoreName"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input asp-for="FirstName" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="FirstName">
+                                    <span asp-validation-for="FirstName"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input asp-for="LastName" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="LastName">
+                                    <span asp-validation-for="LastName"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Address </label>
+                                    <textarea asp-for="Address" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Address"></textarea>
+                                    <span asp-validation-for="Address"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mobile No </label>
+                                    <input asp-for="MobileNo" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="MobileNo">
+                                    <span asp-validation-for="MobileNo"></span>
+                                </div>
+                                <div class="form-check">
+                                    <label asp-for="IsActive" class="form-check-label">
+                                        <input type="checkbox" class="form-check-input"> IsActive <i class="input-helper"></i>
+                                    </label>
+                                    <span asp-validation-for="IsActive"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleSelectCountry">Select Country</label>
+                                    <select class="form-select" id="Country" asp-for="CountryId" asp-items="@ViewBag.CountryId">
+                                        <option value="0">Select Country</option>
+                                    </select>
+                                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleSelectState">Select State</label>
+                                    <select class="form-select" id="State" asp-for="StateId" asp-items="@ViewBag.StateId">
+                                        <option value="0">Select State</option>
+                                    </select>
+                                    <span asp-validation-for="StateId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleSelectCity">Select City</label>
+                                    <select class="form-select" id="City" asp-for="CityId" asp-items="@ViewBag.CityId">
+                                        <option value="0">Select City</option>
+                                    </select>
+                                    <span asp-validation-for="CityId" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email Id </label>
+                                    <input asp-for="EmailId" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="EmailId">
+                                    <span asp-validation-for="EmailId"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label>Password </label>
+                                    <input asp-for="Password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                                    <span asp-validation-for="Password"></span>
+                                </div>
+                                <div class=row>
+                                    <div class="col-md-6">
+                                        <input type="submit" value="SignUp" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a asp-action="SignIn" asp-controller="ManageStore"> <input type="submit" value="Back" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" /></a>
+
+                                    </div>
+                                </div>   
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/adminbackend/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/adminbackend/js/off-canvas.js"></script>
+    <script src="~/adminbackend/js/hoverable-collapse.js"></script>
+    <script src="~/adminbackend/js/misc.js"></script>
+    <!-- endinject -->
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#Country").change(function () {
+
+                $.ajax({
+                    url: "/ManageStore/GetStateJson/" + $("#Country").val(),
+                    type: "Get",
+                    contentType: "application/json",
+                    success: function (result) {
+                        //alert(JSON.stringify(result));
+                        $("#State").empty();
+                        for (var i = 0; i < result.length; i++) {
+                            var str = "<option value='" + result[i].stateId + "'>" + result[i].stateName + "</option>";
+                            $("#State").append(str);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    }
+                });
+
+            });
+
+
+
+            $("#State").change(function () {
+
+                $.ajax({
+                    url: "/ManageStore/GetCityJson/" + $("#State").val(),
+                    type: "Get",
+                    contentType: "application/json",
+                    success: function (result) {
+                        //alert(JSON.stringify(result));
+                        $("#City").empty();
+                        for (var i = 0; i < result.length; i++) {
+                            var str = "<option value='" + result[i].cityId + "'>" + result[i].cityName + "</option>";
+                            $("#City").append(str);
+                        }
+                    },
+                    error: function (err) {
+                        alert(JSON.stringify(err));
+                    }
+                });
+
+            });
+
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+﻿@model Category
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-action="Edit" asp-controller="Category" method="post">
+            <input type="hidden" asp-for="CategoryId" />
+
+            <div class="form-group">
+                <label class="form-label"> category Name</label>
+                <input asp-for="CategoryName" class="form-control" placeholder="CategoryName">
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+           
+            <button type="submit" class="btn btn-gradient-primary me-2">Edit</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="Category">Cancel</a></button>
+        </form>
+    </div>
+</div>

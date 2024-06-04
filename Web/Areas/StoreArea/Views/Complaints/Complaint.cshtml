@@ -1,0 +1,2 @@
+﻿    @model IEnumerable<Complaint>
+@await Component.InvokeAsync("ComplaintVC", new { storeid = Convert.ToInt64(@Context.Session.GetString("StoreId")) })

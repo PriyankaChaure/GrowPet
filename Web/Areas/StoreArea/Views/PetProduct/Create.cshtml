@@ -1,0 +1,53 @@
+﻿@model PetProductVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="Create" method="post">
+            <div><input type ="hidden" @Context.Session.GetString("StoreId")</div>
+            <div class="form-group">
+                <label class="form-label"> Product Name</label>
+                <input asp-for="ProductName" class="form-control" placeholder="Productname">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Mfg Name</label>
+                <input asp-for="MfgName" class="form-control" placeholder="MfgName">
+                <span asp-validation-for="MfgName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Product</label>
+                <select class="form-select" name="ProductType" asp-items="@Html.GetEnumSelectList<ProductEnum>()">
+                    <option value="0">Select Product</option>
+                </select>
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <label class="form-label"> Product Desc</label>
+                <textarea asp-for="ProductDesc" class="form-control" placeholder="ProductDescription"></textarea>
+                <span asp-validation-for="ProductDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> Product Price</label>
+                <input asp-for="ProductPrice" name="ProductPrice" class="form-control" placeholder="Price">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Product Photo</label>
+                <input type="file" name="ActualFile" asp-for="ActualFile" class="form-control" />
+                <span asp-validation-for="ActualFile" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="PetProduct">Cancel</a></button>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Order>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+           
+            <h4 class="card-title">Orders List</h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th> #</th>
+                            <th>Order No</th>
+                            <th>UserName</th>
+                            <th>  StoreName</th>
+                            <th>OrderDate</th>
+                            <th>IsPaid</th>
+                            <th> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int srno = 1;
+                        }
+                        @foreach (var temp in Model)
+                        {
+                            <tr>
+
+                                <td>@srno</td>
+                                <td>@temp.OrderId</td>
+                                <td>@temp.User.FullName</td>
+                                <td>@temp.Store.StoreName</td>
+                                <td>@temp.Orderdate.ToString("dd-mm-yyyy")</td>
+                                @if (temp.IsPaid)
+                                {
+                                    <td class="alert-success">Yes</td>
+                                }
+                                else
+                                {
+                                    <td class="alert-danger">No</td>
+                                }
+                                <td>
+                                    <a class="btn btn-gradient-info btn-rounded btn-fw" asp-controller="Orders" asp-action="ViewDetails" asp-route-id="@temp.OrderId">View Details</a>
+
+                                </td>
+
+                            </tr>
+                            srno++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+           
+         
+        </div>
+    </div>
+</div>

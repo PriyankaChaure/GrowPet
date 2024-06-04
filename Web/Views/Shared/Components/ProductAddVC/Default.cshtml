@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CartVM>
+<style>
+    #addCartBtn:hover {
+        background-color: #000;
+    }
+
+    #cartText:hover {
+        color: #fff;
+    }
+</style>
+@* <div class="offcanvas-header justify-content-center">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div> *@
+<div class="offcanvas-body">
+    <div class="order-md-last">
+
+        <table class="table table-hover w-100">
+            <thead>
+
+                <tr style="background-color:#f9f3ec;color:#000;">
+
+                    <th> #</th>
+                    <th>Product Icons</th>
+                    <th>Product Name</th>
+                    <th>Mfg Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th> Actions</th>
+                </tr>
+            </thead>
+            <tbody style="background-color:#f9f3ec;color:#000;">
+                @{
+                    int srno = 1;
+                    decimal? amount = 0, totalamount = 0;
+                }
+                @foreach (var temp in Model)
+                {
+
+                    <tr>
+                        <td>@srno</td>
+                        <td>
+                            <img src="@temp.PhotoPath" width="100" height="100" />
+                        </td>
+                        <td>@temp.ProductName</td>
+                        <td>@temp.MfgName</td>
+                        <td>@temp.Price</td>
+                        <td>@temp.Quantity</td>
+                        <td>
+                            @{
+                                amount = temp.Quantity * temp.Price;
+                                totalamount += amount;
+                            }
+                            @amount
+                        </td>
+                        <td>
+                            <a id="addCartBtn" asp-action="DeleteCart" asp-controller="Cart" asp-route-cartid="@temp.CartId" class="btn  btn-sm">
+                                <h6 id="cartText"> Delete</h6>
+
+                            </a>
+                        </td>
+                    </tr>
+                    srno++;
+                }
+            
+    </div>
+</div>

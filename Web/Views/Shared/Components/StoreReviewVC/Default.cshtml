@@ -1,0 +1,67 @@
+﻿@model StoreReview
+<script src="~/jquery/jquery.js"></script>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Store Review </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-controller="Review" asp-area="" asp-action="StoreReview" method="post">
+
+            <input type="hidden" asp-for="UserId" value="@TempData["userid"]" />
+           
+            <div class="form-group">
+                <h3 class="text-center">  You Buy The Product From This Store!</h3>
+                <h5 class="text-center"> Please Select The Store You Want To Review!! </h5>
+                @await Component.InvokeAsync("store1VC", new { userid = TempData["userid"] })
+            </div>
+            <div class="form-group">
+                <label class="form-label">Give Review</label>
+                <textarea asp-for="Review" class="form-control" placeholder="Review"></textarea>
+                <span asp-validation-for="Review" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="StoreId" id="mouse" />
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Rating</label>
+                <select class="form-select" name="Rating" asp-items="@Html.GetEnumSelectList<RatingEnum>()">
+                    <option value="0">Select Rating</option>
+                </select>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+           
+
+            <button type="submit" class="btn btn-gradient-primary me-2" style="background-color:#f9f3ec;color:#000">Save</button>
+            <button class="btn btn-light"><a asp-action="review" asp-controller="Review">Cancel</a></button>
+        </form>
+    </div>
+ </div>
+
+<script type="text/javascript">
+        $(function () {
+            var a = parseInt($("#count").val());
+            for (var i = 1; i <= a; i++) 
+            {
+                (function (index) 
+                {
+                    $("#StoreCheck_" + index).change(function () {
+                        if (this.checked) {
+                            var val = $("#StoreId_" + index).val();
+                            var num = parseInt(val);
+                            if (!isNaN(num)) {
+                                $("#mouse").val(num);
+                            } else {
+                                console.error("Invalid value:", val);
+                            }
+                        }
+                    });
+                })(i);
+            }
+        });
+</script>
+

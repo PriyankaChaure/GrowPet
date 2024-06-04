@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Order>
+<a asp-action="Index">Back</a>
+
+@* <style>
+    #addCartBtn:hover {
+        background-color: #000;
+    }
+
+    #cartText:hover {
+        color: #fff;
+    }
+</style> *@
+@* <div class="offcanvas-header justify-content-center">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div> *@
+
+<div class="page-header w-100">
+    <h3 class="page-title">
+        Date:@DateTime.Now.ToString("dd-mm-yyyy")
+    </h3>
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">
+                <h4>
+                    <b>
+                        Store: @Context.Session.GetString("StoreName")
+                        Pending Report
+                    </b>
+                </h4>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="offcanvas-body">
+    <div class="order-md-last">
+
+        <table class="table table-hover w-100">
+            <thead>
+
+                <tr >
+
+                    <th> #</th>
+                    <th>Order Date</th>
+                    <th>Order No</th>
+                    <th> Customer Name</th>
+              
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int srno = 1;
+                   
+                }
+                @foreach (var temp in Model)
+                {
+
+                    <tr>
+                        <td>@srno</td>
+                        <td>@temp.Orderdate.ToString("dd-mm-yyyy")</td>
+                        <td>@temp.OrderId</td>
+                        <td>@temp.User.FullName</td>
+                    </tr>
+                    srno++;
+                }
+                
+              
+            </tbody>
+        </table>
+        <br />
+        <div class="text-center  w-100">
+            <button type="submit" onclick="PrintReport()" class="btn btn-gradient-primary me-2">Print</button>
+        </div>
+    </div>
+</div>
+<script>
+    function PrintReport() {
+        window.print();
+    }
+</script>

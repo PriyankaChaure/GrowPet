@@ -1,0 +1,59 @@
+﻿@model PetFoodVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="Create" method="post">
+            <div><input type ="hidden" @Context.Session.GetString("StoreId")</div>
+            <div class="form-group">
+                <label class="form-label"> Food Name</label>
+                <input asp-for="FoodName" class="form-control" placeholder="FoodName">
+                <span asp-validation-for="FoodName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Mfg Name</label>
+                <input asp-for="MfgName" class="form-control" placeholder="MfgName">
+                <span asp-validation-for="MfgName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Product</label>
+                <select class="form-select" name="ProductType" asp-items="@Html.GetEnumSelectList<ProductEnum>()">
+                    <option value="0">Select Product</option>
+                </select>
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Food Validity Based On Pet Age </label>
+                <select class="form-select" name="GoodFoodAccordingToPetAge" asp-items="@Html.GetEnumSelectList<GoodFoodForPetAccordingPetAgeEnum>()">
+                    <option value="0">Select </option>
+                </select>
+                <span asp-validation-for="GoodFoodAccordingToPetAge" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> FoodDesc</label>
+                <textarea asp-for="FoodDesc" class="form-control" placeholder="FoodDescription"></textarea>
+                <span asp-validation-for="FoodDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> Food Price</label>
+                <input asp-for="ProductPrice" name="ProductPrice" class="form-control" placeholder="Price">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Food Photo</label>
+                <input type="file" name="ActualFile" asp-for="ActualFile" class="form-control" />
+                <span asp-validation-for="ActualFile" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="PetFood">Cancel</a></button>
+        </form>
+    </div>
+</div>

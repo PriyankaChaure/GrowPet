@@ -1,0 +1,32 @@
+﻿@model Tax
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-action="Edit" asp-controller="Tax" method="post">
+            <input type="hidden" asp-for="TaxId" />
+
+           
+           
+            <div class="form-group">
+                <label class="form-label">  Tax Percentage</label>
+                <input asp-for="TaxPercentage" class="form-control" placeholder="TaxPercentage">
+                <span asp-validation-for="TaxPercentage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> HSNSACNo </label>
+                <input asp-for="HSNSACNo" class="form-control" placeholder="HSNSACNo">
+                <span asp-validation-for="HSNSACNo" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary me-2">Edit</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="Tax">Cancel</a></button>
+        </form>
+    </div>
+</div>

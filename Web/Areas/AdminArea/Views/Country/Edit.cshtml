@@ -1,0 +1,25 @@
+﻿@model Country
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-action="Edit" asp-controller="Country" method="post">
+            <input type="hidden" asp-for="CountryId" />
+            <div class="form-group">
+                <label class="form-label">Country Name</label>
+                <input asp-for="CountryName" class="form-control" placeholder="Country Name ">
+                <span asp-validation-for="CountryName" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-gradient-primary me-2">Edit</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="Country">Cancel</a></button>
+        </form>
+    </div>
+</div>

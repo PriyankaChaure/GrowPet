@@ -1,0 +1,42 @@
+﻿@model IEnumerable<PetFamily>
+
+<div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+           
+            <h4 class="card-title">Category List</h4>
+            <a class="btn btn-gradient-primary btn-rounded btn-fw" asp-action="Create" asp-controller="PetFamily"> Create </a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        
+                        <th> #</th>
+                        <th>Pet Family Name</th>
+                        
+                        <th> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                    <tr>
+                       
+                        <td>@srno</td>
+                        <td>@temp.PetFamilyName</td>
+                         
+                        <td>
+                             <a class="btn btn-gradient-info btn-rounded btn-fw" asp-action="Edit" asp-route-id="@temp.PetFamilyId">Edit</a>
+                             <a class="btn btn-gradient-danger btn-rounded btn-fw" asp-action="Delete" asp-route-id="@temp.PetFamilyId">Delete</a>
+                        </td>
+ 
+                    </tr>
+                        srno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

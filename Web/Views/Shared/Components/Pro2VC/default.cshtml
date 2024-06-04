@@ -1,0 +1,43 @@
+﻿@model IEnumerable<StoreReviewVM>
+<style>
+    #addCartBtn:hover {
+        background-color: #000;
+    }
+
+    #cartText:hover {
+        color: #fff;
+    }
+</style>
+
+
+
+<table class="table table-hover w-100 table-bordered">
+    <thead>
+
+        <tr>
+
+
+            <th for="ch">Food Id</th>
+            <th>Food Name</th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+     
+        @foreach (var temp in Model)
+        {
+
+            <tr>
+               
+                <input type="hidden" value="@temp.ProductId" id="FoodId_@temp.ProductId" />
+                <td><input type="checkbox" id="Pro2Check_@temp.ProductId" />@temp.ProductId</td>
+                <td>@temp.FoodName</td>
+                <input type="hidden" id="count2"  value="@TempData["count"]" />
+              
+            </tr>
+
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,37 @@
+﻿@model Solution
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title absolute-center">Solution Details  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-sm-2 col-md-2 label"> Solution For Complaint Id:</div>
+                <div class="col-sm-9 col-md-10">@Model.ComplaintId</div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Solution date:</div>
+                <div class="col-sm-9 col-md-10">@Model.SolutionDate</div>
+            </div>   <hr />
+
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Solution Desc :</div>
+                <div class="col-sm-9 col-md-10">@Model.SolutionDesc</div>
+            </div>   <hr />
+
+
+            <button class="btn btn-gradient-primary"><a asp-action="Index" asp-controller="Complaints">Back</a></button>
+
+        </form>
+    </div>
+</div>
+

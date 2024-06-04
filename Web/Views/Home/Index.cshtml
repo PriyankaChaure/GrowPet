@@ -1,0 +1,52 @@
+﻿<script src="~/jquery/jquery.js"></script>
+<h2>Welcome To Home Index</h2>
+
+
+
+<section id="clothing" class="my-5 overflow-hidden">
+    <div class="container pb-5">
+        <div class="section-header d-md-flex justify-content-between align-items-center mb-3">
+            <div class="container">
+                <div class="row">
+                    <div class="cold-md-12">
+                      @*   @await Component.InvokeAsync("PetVC") *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@* <script type="text/javascript">
+   
+
+    $(function () {
+
+        $("#Pet").change(function () {
+
+            $.ajax({
+                url: "/ManageUser/GetPetTypeJson/"+$("#Pet").val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    //alert(JSON.stringify(result));
+                    $("#State").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        var str = "
+                     <option value='" + result[i].stateId + "'>" + result[i].stateName + "</option>";
+                        $("#State").append(str);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+        });
+
+    });
+
+</script>
+ *@

@@ -1,0 +1,297 @@
+﻿@model Order
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title absolute-center">Order Details  </h2>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+        <div class="table-responsive">
+
+            <form class="forms-sample" enctype="multipart/form-data" asp-area="StoreArea" asp-action="DispatchOrder" asp-controller="Orders" method="get">
+
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 label">User Name:</div>
+                    <div class="col-sm-9 col-md-10">@Model.User.FullName</div>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 label">Order No:</div>
+                    <div class="col-sm-9 col-md-10">@Model.OrderId</div>
+                </div>   <hr />
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 label"> Order Date:</div>
+                    <div class="col-sm-9 col-md-10">@Model.Orderdate.ToString("dd-mm-yyyy")</div>
+                </div>    <hr />
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 label">Store Name:</div>
+                    <div class="col-sm-9 col-md-10">@Model.Store.StoreName</div>
+                </div>  <hr />
+                <div class="row">
+                    <div class="col-sm-3 col-md-2 label">Is Paid:</div>
+                    <div class="col-sm-9 col-md-10">
+                        @if (Model.IsPaid)
+                        {
+                            <div class="text-success ">Yes</div>
+                        }
+                        else
+                        {
+                            <div class="text-danger">No</div>
+                        }
+                    </div>
+                </div>   <hr />
+
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2> Tax Details </h2>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <td> Order No: </td>
+                                    <td>
+                                        @Model.OrderId
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Order Amount: </td>
+                                    <td>
+                                        @Model.OrderDets.Sum(p => p.Price)
+                                        @{
+                                            decimal t = @Model.OrderDets.Sum(p => p.Price);
+
+                                        }
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Tax No: </td>
+                                    <td>
+                                        1
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Tax Percentage: </td>
+                                    <td>
+                                        18%
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td> Tax Amount will Be: </td>
+                                    <td>
+                                        @{
+                                            decimal taxpercentage = Convert.ToDecimal(0.18);
+                                            double TaxAmount = Convert.ToDouble(t * taxpercentage);
+
+                                        }
+                                        @(TaxAmount)
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div> <hr />
+
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-md-12">
+                        @if (!Model.Payments.Any())
+                            {
+                                <h2> Payment Details </h2>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td> Payment Mode: </td>
+                                        <td>
+                                            Cash On Delivery
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Payment Date: </td>
+                                        <td>
+                                            @Model.Orderdate.ToString("dd-mm-yyyy")
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Payment Amount: </td>
+                                        <td>
+                                            @Model.OrderDets.Sum(p => p.Price)
+                                            @{
+                                                double p = Convert.ToDouble(Model.OrderDets.Sum(p => p.Price));
+                                            }
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Tax Amount: </td>
+                                        <td>
+                                            @TaxAmount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Afte Adding Tax Amount Will Be: </td>
+                                        <td>
+                                            @{
+
+                                                double s = p + TaxAmount;
+                                            }
+                                            @s
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+                <hr />
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (Model.Payments.Any())
+                            {
+                                <h2> Payment Details </h2>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td> Payment Mode: </td>
+                                        <td>
+                                            @Enum.GetName(typeof(PaymentEnum), Model.Payments.FirstOrDefault().PaymentMode)
+                                     
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Payment Date: </td>
+                                        <td>
+                                            @Model.Payments.FirstOrDefault().PaymentDate.ToString("dd-mm-yyyy")
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Payment Amount: </td>
+                                        <td>
+                                            @Model.Payments.FirstOrDefault().PaymentAmount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Tax Amount: </td>
+                                        <td>
+                                            @TaxAmount
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Afte Adding Tax Amount Will Be: </td>
+                                        <td>
+                                            @{
+                                                double pa = Convert.ToDouble(Model.Payments.FirstOrDefault().PaymentAmount);
+                                                double s = pa + TaxAmount;
+                                            }
+                                            @s
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            @if (Model.DispatchOrders.Any())
+                            {
+                                <h2> Dispatch Details </h2>
+                                <hr />
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td>  Dispatch Date: </td>
+                                        <td>
+                                            @Model.DispatchOrders.FirstOrDefault().DispatchDate.ToString("dd-mm-yyyy")
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Expected Reach Date: </td>
+                                        <td>
+                                            @Model.DispatchOrders.FirstOrDefault().ExpectedReachDate.ToString("dd-mm-yyyy")
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td> Docket No: </td>
+                                        <td>
+                                            @Model.DispatchOrders.FirstOrDefault().DocketNo
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td> Dispatch Agency Name: </td>
+                                        <td>
+                                            @Model.DispatchOrders.FirstOrDefault().DispatchAgency.FullName
+                                        </td>
+                                    </tr>
+                                </table>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h2> Order Details </h2>
+                            @if (Model.OrderDets.Any())
+                            {
+                                // if(Model.OrderDets.FirstOrDefault().Product.ProductType)
+                                @await Component.InvokeAsync("PetShowVC", new { orderid = @Model.OrderId })
+
+                            }
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            @if (Model.OrderDets.Any())
+                            {
+                                // if(Model.OrderDets.FirstOrDefault().Product.ProductType)
+
+                                @await Component.InvokeAsync("FoodShowVC", new { orderid = @Model.OrderId })
+
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="col-md-12">
+                            @if (Model.OrderDets.Any())
+                            {
+                                @await Component.InvokeAsync("ProductShowVC", new { orderid = @Model.OrderId })
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row mt-3">
+                    <div class="col-md-12  text-center">
+                      @*   <a class="text-white btn btn-sm w-25 grid-margin btn-block mx-auto  btn-gradient-primary" asp-route-id="@ViewBag.orderid" asp-action="DispatchOrder" asp-controller="Orders">DispatchOrder</a> *@
+
+                        <a class="text-white btn btn-sm w-25 grid-margin btn-block mx-auto  btn-gradient-primary" asp-action="Index" asp-controller="Orders">Back</a>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+

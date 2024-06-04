@@ -1,0 +1,26 @@
+﻿@model PetType
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-action="Edit" asp-controller="PetType" method="post">
+            <input type="hidden" asp-for="PetTypeId" />
+
+            <div class="form-group">
+                <label class="form-label"> Pet Type Name</label>
+                <input asp-for="PetTypeName" class="form-control" placeholder="PetTypeName">
+                <span asp-validation-for="PetTypeName" class="text-danger"></span>
+            </div>
+           
+            <button type="submit" class="btn btn-gradient-primary me-2">Edit</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="PetType">Cancel</a></button>
+        </form>
+    </div>
+</div>

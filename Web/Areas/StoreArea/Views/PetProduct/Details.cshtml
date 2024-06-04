@@ -1,0 +1,54 @@
+﻿@model PetProductVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title absolute-center" >Details  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="Edit" method="post">
+            <div>
+                <input type="hidden" @Context.Session.GetString("StoreId")
+                <input type="hidden" asp-for="PetProductId" />
+                <input type="hidden" asp-for="ProductId" />
+
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-md-2 label">Product Name:</div>
+                <div class="col-sm-9 col-md-10">@Model.ProductName</div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Mfg Name:</div>
+                <div class="col-sm-9 col-md-10">@Model.MfgName</div>
+            </div>   
+              <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Product Type :</div>
+                <div class="col-sm-9 col-md-10">@Enum.GetName(typeof(ProductEnum), @Model.ProductType)</div>
+            </div>   <hr />
+          
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Product Description :</div>
+                <div class="col-sm-9 col-md-10"> @Model.ProductDesc</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Product Price :</div>
+                <div class="col-sm-9 col-md-10"> @Model.ProductPrice</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-6 label">Product Photo :</div>
+                <div class="col-sm-9 col-md-10">
+                <img src="@Model.PhotoPath" width="100" height="100" />
+                </div>
+            </div>
+         <button class="btn btn-gradient-primary"><a asp-action="Index" asp-controller="PetProduct">Back To List</a></button>
+          
+        </form>
+    </div>
+</div>

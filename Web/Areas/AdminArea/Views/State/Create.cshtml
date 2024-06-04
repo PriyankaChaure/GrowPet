@@ -1,0 +1,32 @@
+﻿@model State
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-controller="State" asp-action="Create" method="post">
+
+            <div class="form-group">
+                <label class="form-label">State Name</label>
+                <input asp-for="StateName" class="form-control" placeholder="State Name ">
+                <span asp-validation-for="StateName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry">Select Country</label>
+                <select class="form-select" asp-for="CountryId" asp-items="@ViewBag.CountryId" id="exampleSelectCountry">
+                    <option>Select Country</option>
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="State">Cancel</a></button>
+        </form>
+    </div>
+</div>

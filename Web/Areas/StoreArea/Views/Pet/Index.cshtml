@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Pet>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+           
+            <h4 class="card-title">Pet List</h4>
+            <a class="btn btn-gradient-primary btn-rounded btn-fw" asp-action="Create" asp-controller="Pet"> Create </a>
+           <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        
+                        <th> #</th>
+                        <th>Pet Icons</th>
+                        <th>Pet Name</th>
+                        <th>Age</th>
+                        <th> Gender</th>
+                      @*   <th>PetTypeName</th>
+                        <th>PetFamilyName</th>
+                         <th>Pet Description</th> *@ 
+                      @*   <th>ProductType</th> *@
+                        <th>Price</th>
+                        
+                        <th> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                      if (Convert.ToInt64(@Context.Session.GetString("StoreId"))==temp.Product.StoreId){ 
+                    <tr>
+                        <td>@srno</td>
+                            <td>
+                                <img src="@temp.PhotoPath" width="100" height="100" />
+                            </td>
+                        <td>@temp.PetName</td>
+                         <td>@temp.Age</td>
+                         <td>@Enum.GetName(typeof(GenderEnum),temp.Gender)</td>
+                         <td>@temp.Product.ProductPrice</td>
+                        <td>
+                             <a class="btn btn-gradient-info btn-rounded btn-fw" asp-action="Edit" asp-route-id="@temp.PetId">Edit</a> 
+                             <a class="btn btn-gradient-danger btn-rounded btn-fw" asp-action="Delete" asp-route-id="@temp.PetId">Delete</a>
+                             <a class="btn  btn-gradient-success btn-rounded btn-fw" asp-action="Details" asp-route-id="@temp.PetId">Details</a>
+                         </td>
+ 
+                    </tr>
+                        srno++;
+                    
+                    }
+                    }
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>

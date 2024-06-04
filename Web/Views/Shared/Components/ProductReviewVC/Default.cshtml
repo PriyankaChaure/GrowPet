@@ -1,0 +1,102 @@
+﻿@model ProductReview
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Product Review  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-controller="Review" asp-area="" asp-action="ProductReview" method="post">
+
+            <input type="hidden" asp-for="UserId" value="@TempData["userid"]" />
+           
+            <div class="form-group">
+                <h3 class="text-center">  You Buy These Products!</h3>
+                <h5 class="text-center"> Please Select The Product You Want To Review!! </h5>
+                <div class="row">
+                    <div class="col-md-4">
+                     @await Component.InvokeAsync("Pro1VC", new { userid = TempData["userid"] })
+                    </div>
+                    <div class="col-md-4">
+                        @await Component.InvokeAsync("Pro2VC", new { userid = TempData["userid"] })
+                    </div>
+                    <div class="col-md-4">
+                        @await Component.InvokeAsync("Pro3VC", new { userid = TempData["userid"] })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Give Review</label>
+                <textarea asp-for="ReviewDesc" class="form-control" placeholder="Review"></textarea>
+                <span asp-validation-for="ReviewDesc" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="ProductId" name="ProductId" id="mouse1" />
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Rating</label>
+                <select class="form-select" name="Rating" asp-items="@Html.GetEnumSelectList<RatingEnum>()">
+                    <option value="0">Select Rating</option>
+                </select>
+                <span asp-validation-for="Rating" class="text-danger"></span>
+            </div>
+           
+
+            <button type="submit" class="btn btn-gradient-primary me-2" style="background-color:#f9f3ec;color:#000">Save</button>
+            <button class="btn btn-light"><a asp-action="review" asp-controller="Review">Cancel</a></button>
+        </form>
+    </div>
+</div>
+
+
+@* <script type="text/javascript">
+    $(function () {
+        var a = parseInt($("#count1").val());
+        //alert(a);
+        for (var i = 1; i <= a; i++) {
+            (function (index1) {
+                $("#Pro1Check_" + index1).change(function () {
+                    if (this.checked) {
+                        var va = $("#PetId_" + index1).val();
+                       
+                        var num = parseInt(val);
+                       
+                        if (!isNaN(num)) {
+                            $("#mouse1").val(num);
+                        } else {
+                            console.error("Invalid value:", val);
+                        }
+                    }
+                });
+            })(i);
+        }
+    });
+</script> *@
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[id^="ProCheck_"]').change(function () {
+            if (this.checked) {
+                var index = $(this).attr('id').split('_')[1];
+                var val = $("#PetId_" + index).val();
+                $("#mouse1").val(val);
+            }
+        });
+        $('[id^="Pro2Check_"]').change(function () {
+            if (this.checked) {
+                var index = $(this).attr('id').split('_')[1];
+                var val = $("#FoodId_" + index).val();
+                $("#mouse1").val(val);
+            }
+        });
+        $('[id^="Pro3Check_"]').change(function () {
+            if (this.checked) {
+                var index = $(this).attr('id').split('_')[1];
+                var val = $("#PetProductId_" + index).val();
+                $("#mouse1").val(val);
+            }
+        });
+    });
+</script>

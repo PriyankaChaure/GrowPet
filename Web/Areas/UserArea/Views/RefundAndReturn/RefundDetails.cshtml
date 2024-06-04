@@ -1,0 +1,37 @@
+﻿@model ReturnVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title absolute-center">Refund Details  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-sm-2 col-md-2 label"> Return Id:</div>
+                <div class="col-sm-9 col-md-10">@Model.ReturnId</div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Refund Date:</div>
+                <div class="col-sm-9 col-md-10">@Model.RefundDate</div>
+            </div>   <hr />
+
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Refund Amount  :</div>
+                <div class="col-sm-9 col-md-10">@Model.RefundAmount </div>
+            </div>   <hr />
+
+
+            <button class="btn btn-gradient-primary"><a asp-action="Index" asp-controller="RefundAndReturn">Back</a></button>
+
+        </form>
+    </div>
+</div>
+

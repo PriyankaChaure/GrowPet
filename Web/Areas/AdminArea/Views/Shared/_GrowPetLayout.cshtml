@@ -1,0 +1,219 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>GrowPet Admin</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="~/AdminBackend/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="~/AdminBackend/vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- Layout styles -->
+    <script src="~/jquery/jquery.js"></script>
+
+    <script src="~/jquery/jquery.min.js"></script>
+    <script src="~/jquery/jquery.slim.js"></script>
+    <script src="~/jquery/jquery.slim.min.js"></script>
+    <a href="~/jquery/jquery.min.map">~/jquery/jquery.min.map</a>
+    <a href="~/jquery/jquery.slim.min.map">~/jquery/jquery.slim.min.map</a>
+    <link rel="stylesheet" href="~/AdminBackend/css/style.css">
+    <!-- End layout styles -->
+    <link rel="shortcut icon" href="~/AdminBackend/images/favicon.ico" />
+</head>
+<body>
+    <div class="container-scroller">
+        <div class="row p-0 m-0 proBanner" id="proBanner">
+            <div class="col-md-12 p-0 m-0">
+                <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
+                    <div class="ps-lg-1">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
+                            <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between">
+                        <a href="https://www.bootstrapdash.com/product/purple-bootstrap-admin-template/"><i class="mdi mdi-home me-3 text-white"></i></a>
+                        <button id="bannerClose" class="btn border-0 p-0">
+                            <i class="mdi mdi-close text-white me-0"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" href="index.html"><img src="~/AdminBackend/images/logo.PNG" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="~/AdminBackend/images/logo-mini.svg" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-stretch">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+                <div class="search-field d-none d-md-block">
+                 
+                </div>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="nav-profile-img">
+                                <img src="~/AdminBackend/images/faces/face10.jpg" alt="image">
+                                <span class="availability-status online"></span>
+                            </div>
+                            <div class="nav-profile-text">
+                                <p class="mb-1 text-black">@Context.Session.GetString("AdminName")</p>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
+                            <a class="dropdown-item" href="#">
+                                <i class="mdi mdi-cached me-2 text-success"></i> Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" asp-action="SignOut" asp-controller="ManageAdmin" asp-area="">
+                                <i class="mdi mdi-logout me-2 text-primary"></i> Signout
+                            </a>
+                            <a class="dropdown-item" asp-action="ChangePassword" >
+                                <i class="mdi mdi-logout me-2 text-primary"></i> Change Password
+                            </a>
+                            <a class="dropdown-item" asp-action="EditProfile">
+                                <i class="mdi mdi-logout me-2 text-primary"></i> Edit Profile
+                            </a>
+                        </div>
+                    </li>
+                    <li class="nav-item d-none d-lg-block full-screen-link">
+                        <a class="nav-link">
+                            <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
+                        </a>
+                    </li>
+                
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item nav-profile">
+                        <a href="#" class="nav-link">
+                            <div class="nav-profile-image">
+                                <img src="~/AdminBackend/images/faces/face10.jpg" alt="profile">
+                                <span class="login-status online"></span>
+                                <!--change to offline or busy as needed-->
+                            </div>
+                            <div class="nav-profile-text d-flex flex-column">
+                                <span class="font-weight-bold mb-2">@Context.Session.GetString("AdminName")</span>
+                                <span class="text-secondary text-small">Admin Manager</span>
+                            </div>
+                            <i class="mdi mdi-bookmark-check text-success nav-profile-badge"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"asp-controller="AdminHome" asp-action="Index" asp-area="AdminArea">
+                            <span class="menu-title">Dashboard</span>
+                            <i class="mdi mdi-home menu-icon"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                            <span class="menu-title">Configurations</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi-crosshairs-gps menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Country">Country</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="State">State</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="City">City</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="collapse" href="#ui-basic1" aria-expanded="false" aria-controls="ui-basic1">
+                            <span class="menu-title">Config</span>
+                            <i class="menu-arrow"></i>
+                            <i class="mdi mdi mdi-apps-box menu-icon"></i>
+                        </a>
+                        <div class="collapse" id="ui-basic1">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Tax">Tax</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="Category">Category</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="PetType">PetType</a></li>
+                                <li class="nav-item"> <a class="nav-link" asp-action="Index" asp-controller="PetFamily">PetFamily</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                   
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="page-header">
+                        <h3 class="page-title">
+                            <span class="page-title-icon bg-gradient-primary text-white me-2">
+                                <i class="mdi mdi-home"></i>
+                            </span> Dashboard
+                        </h3>
+                        <nav aria-label="breadcrumb">
+                            <ul class="breadcrumb">
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                   
+                   
+                    <div class="row">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                  @*   <h4 class="card-title">Welcome Page! </h4> *@
+                                    <div>@RenderBody()</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   
+                   
+
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="container-fluid d-flex justify-content-between">
+                        <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright © bootstrapdash.com 2021</span>
+                        <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin template</a> from Bootstrapdash.com</span>
+                    </div>
+                   
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="~/AdminBackend/vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="~/AdminBackend/vendors/chart.js/Chart.min.js"></script>
+    <script src="~/AdminBackend/js/jquery.cookie.js" type="text/javascript"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="~/AdminBackend/js/off-canvas.js"></script>
+    <script src="~/AdminBackend/js/hoverable-collapse.js"></script>
+    <script src="~/AdminBackend/js/misc.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page -->
+    <script src="~/AdminBackend/js/dashboard.js"></script>
+    <script src="~/AdminBackend/js/todolist.js"></script>
+    <!-- End custom js for this page -->
+</body>
+</html>

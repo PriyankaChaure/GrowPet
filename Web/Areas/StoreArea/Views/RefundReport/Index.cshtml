@@ -1,0 +1,67 @@
+﻿<script src="~/jquery/jquery.js"></script>
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-info">@TempData["Message"]</div>
+            }
+            <form class="forms-sample" enctype="multipart/form-data" asp-action="Refunds" method="get">
+                <div class="row vh-25 align-items-center">
+                    <div class="row">
+                        <div class="col-md-2">From Date:</div>
+                        <div class="col-md-4">
+                            <input class="form-control" name="f" id="from" placeholder="FromDate" type="date" data-val="true" data-val-required="From Date Require!">
+                        </div>
+
+                    </div>
+                    <div class="row mt-1 ">
+                        <div class="col-md-2">To Date:</div>
+
+                        <div class="col-md-4 ">
+                            <input class="form-control" name="t" id="to" placeholder="ToDate" type="date" data-val="true" data-val-required="To Date Require!">
+                        </div>
+
+                    </div>
+
+                    <div class="mt-2">
+                        <button type="submit" id="ok"  class="btn btn-gradient-primary me-2">Ok</button>
+                    </div>
+                </div>
+                <div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@* <script type="text/javascript">
+    $(function () {
+
+        $("#ok").click(function () {
+             var fromDate=$("#from").val();
+             alert(fromDate);
+            var toDate = $("#to").val();
+             alert(toDate);
+            // var url = "/StoreArea/CollectionReport/Collections/?from=" + fromDate + "&to=" + toDate;
+            // alert(url);
+            $.ajax({
+
+                url: "/Home/Collections/?from=" + fromDate + "&to=" + toDate,
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    alert(JSON.stringify(result));
+
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+        });
+
+    });
+
+</script> *@

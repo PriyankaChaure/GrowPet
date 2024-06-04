@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = "~/Views/Shared/userlayout.cshtml";
+}
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <script src="~/jquery/jquery.js"></script>
+            <section id="register" @* style="background: url('/UserFrontend/images/background-img.png') no-repeat;" *@>
+                <div class="w-50 mx-auto">
+                    @if (TempData["Message"] != null)
+                {
+                    <div class="alert alert-info">@TempData["Message"]</div>
+                }
+                </div>
+                <h2 class="display-3 fw-normal text-center">
+                    <span class="text-primary">Review</span>
+                </h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+              
+                <div class="row"> 
+                <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <div class="col text-center">
+                            <div class="btn-group" role="group" aria-label="Basic example">
+
+                                <label for="ReviewFor">Review For:</label>
+                                <select id="review"class="filter-categories border-0 mb-0 ">
+                                    <option value="1"> Store Review</option>
+                                    <option value="2">Product Review</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>  
+                <br />
+            </section>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                   
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+    <div id="storereview" class="w-50 mx-auto" style="display: none;">
+        @await Component.InvokeAsync("StoreReviewVC", new { userid = Convert.ToInt64(@Context.Session.GetString("UserId")) })
+    </div>
+    <div id="productreview" class="w-50 mx-auto" style="display: none;">
+        @await Component.InvokeAsync("ProductReviewVC", new { userid = Convert.ToInt64(@Context.Session.GetString("UserId")) })
+    </div>
+            <div class="col text-center">
+                <div class="btn-group w-25" role="group" aria-label="Basic example">
+                    <a asp-action="AddReview" asp-controller="Review" class="btn btn-sm w-25 btn-secondary btn-lg rounded-1">Back</a>
+
+
+                </div>
+            </div>
+     </div>
+    </div>
+  </div>
+
+<script>
+$(function () {
+    $("#review").change(function () {
+        var r = $(this).val();
+        if (r == 1) 
+        { 
+            $("#storereview").show();
+            $("#productreview").hide();
+        } 
+        else 
+        {
+            $("#storereview").hide();
+            $("#productreview").show();
+        }
+    });
+       
+});
+</script>

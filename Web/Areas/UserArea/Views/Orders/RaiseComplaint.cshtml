@@ -1,0 +1,107 @@
+﻿@model Complaint
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Raise Complaint  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="RaiseComplaint" method="post">
+
+            <div class="form-group">
+                <label class="form-label">  Order Id:@TempData["OrderId"]</label>
+            </div>
+          <div class="form-group">
+              <div class="row">
+                     <div class="col-md-4">
+                        @await Component.InvokeAsync("ProductIdVC", new { orderid =@TempData["OrderId"] })
+                     </div>
+
+      
+              
+                    <div class="col-md-4">
+                        @await Component.InvokeAsync("ProductId2VC", new { orderid = @TempData["OrderId"] })
+                    </div>
+
+
+             
+                    <div class="col-md-4">
+                        @await Component.InvokeAsync("ProductId1VC", new { orderid = @TempData["OrderId"] })
+                    </div>
+
+
+                </div>
+
+            </div> 
+            <div class="form-group">
+                <input type="hidden" asp-for="ProductId" id="mouse" />
+             @*    <input type="hidden" asp-for="ProductId" id="mouse1" />
+                <input type="hidden" asp-for="ProductId" id="mouse2" /> *@
+            </div> 
+
+            @* <div class="form-group">
+                <label class="form-label"> Product ID : <input asp-for="ProductId" id="mouse"/></label>
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label class="form-label"> Compaint Date</label>
+                <input asp-for="ComplaintDate" class="form-control" placeholder="ComplaintDate">
+                <span asp-validation-for="ComplaintDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> Complaint Description</label>
+                <textarea asp-for="ComplaintDesc" class="form-control" placeholder="ComplaintDesc"></textarea>
+                <span asp-validation-for="ComplaintDesc" class="text-danger"></span>
+            </div>
+
+           
+            <button type="submit" asp-route-id="@TempData["OrderId"]" class="btn btn-gradient-primary me-2">Save</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="Orders">Cancel</a></button>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#productCheck").change(function () {
+            if (this.checked) {
+                var a = $("#ProductId").val();
+                $("#mouse").val(a);
+            }
+
+        });
+
+
+        $("#productCheck1").change(function () {
+            if (this.checked) {
+                var a = $("#ProductId1").val();
+                $("#mouse").val(a);
+            }
+
+        });
+         
+        $("#productCheck2").change(function () {
+            if (this.checked) {
+                var a = $("#ProductId2").val();
+                $("#mouse").val(a);
+            }
+        });
+            
+    });
+</script>
+@* <script type="text/javascript">
+    $(function () {
+        $(".productCheck").change(function () {
+            if (this.checked) {
+                var a = $(this).siblings("input[type='text']").val();
+                $(this).siblings(".mouse").val(a);
+            }
+        });
+    });
+</script> *@

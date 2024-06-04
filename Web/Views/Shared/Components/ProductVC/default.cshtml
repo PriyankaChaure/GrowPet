@@ -1,0 +1,94 @@
+﻿@model IEnumerable<PetProduct>
+
+
+<section id="categories">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class=" text-center">
+                <section id="clothing" class="overflow-hidden">
+                    <div class="container-fluid">
+                        <div class="section-header d-md-flex justify-content-between align-items-center">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <table class="table table-hover w-100">
+                                                <thead>
+                                                    <tr style="background-color:#f9f3ec;color:#000;">
+                                                        <form asp-action="SearchByProductProperty" method="get">
+                                                        <th colspan="4">
+
+                                                            <div class="form-group">
+                                                                <label>Accessories Name</label>
+                                                                <input type="text" name="productname" />
+
+                                                            </div>
+
+                                                        </th>
+
+                                                        <th colspan="3">
+                                                            <div class="form-group">
+                                                                <button class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                                                    Search
+                                                                </button>
+                                                            </div>
+                                                        </th>
+                                                        </form>
+                                                      
+
+                                                    </tr>
+                                                    <tr style="background-color:#f9f3ec;color:#000;">
+
+                                                        <th> #</th>
+                                                        <th>Product Icon</th>
+                                                        <th>Product Name</th>
+                                                        <th>Mfg Name</th>                                                        <th>Price</th>
+
+                                                        <th> Actions</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody style="background-color:#f9f3ec;color:#000;">
+                                                    @{
+                                                        int srno = 1;
+                                                    }
+                                                    @foreach (var temp in Model)
+                                                    {
+
+                                                        <tr>
+                                                            <td>@srno</td>
+                                                            <td>
+                                                                <img src="@temp.PhotoPath" width="100" height="100" />
+                                                            </td>
+                                                            <td>@temp.ProductName</td>
+                                                            <td>@temp.MfgName</td>
+                                                            <td>@temp.Product.ProductPrice</td>
+
+
+                                                            <td>
+                                                                <a id="addCartBtn" asp-action="AddToCartProduct" asp-controller="Cart" asp-route-productid="@temp.PetProductId" asp-route-storeid="@temp.Product.StoreId" class="btn  btn-sm">
+                                                                    <h6 id="cartText"> AddToCart</h6>
+
+                                                                </a>
+                                                                <a id="addCartBtn" asp-action="AddReview" asp-controller="Review" class="btn btn-sm">
+                                                                    <h6 id="cartText"> Review</h6>
+
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        srno++;
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,59 @@
+﻿@model ReturnVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Refund Form  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="" method="post">
+            <input type="hidden" asp-for="ReturnId" value="@ViewBag.ReturnId"/>
+            <input type="hidden" asp-for="ProductPrice" value="@Model.ProductPrice" />
+           
+            <div class="form-group">
+                <label class="form-label">  Return Id:@ViewBag.ReturnId</label>
+            </div>
+            <hr />
+            <div class="form-group">
+                <label class="form-label">Order Id:@Model.OrderId</label>
+
+            </div>  <hr />
+            <div class="form-group">
+                <label class="form-label">Product Id:@Model.ProductId</label>
+              
+            </div>  <hr />
+            <div class="form-group">
+                <label class="form-label">Product Type:@Enum.GetName(typeof(ProductEnum), Model.ProductType)</label>
+
+            </div>  <hr />
+            <div class="form-group">
+                <label class="form-label">
+                    @if (Model.ProductType == (int)ProductEnum.Pet)
+                    {
+                        <label class="form-label"> Pet Name :@Model.PetName</label>
+                      
+                    }
+                    else if (Model.ProductType == (int)ProductEnum.PetFood)
+                    {
+                        <label class="form-label"> Food Name :@Model.FoodName</label>
+                    }
+                    else if (Model.ProductType == (int)ProductEnum.PetProduct)
+                    {
+                        <label class="form-label"> Product Name :@Model.ProductName</label>
+                    }
+                </label>
+
+            </div><hr />
+            <div class="form-group">
+                <label class="form-label">Product Amount:@Model.ProductPrice</label>
+            </div>
+            <button type="submit" asp-route-id="@Model.ReturnId" class="btn btn-gradient-primary me-2">Refund</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="ReturnAndRefund">Cancel</a></button>
+        </form>
+    </div>
+</div>

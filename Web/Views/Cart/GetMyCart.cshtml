@@ -1,0 +1,93 @@
+﻿
+<style>
+    #addCartBtn:hover {
+        background-color: #000;
+    }
+
+    #cartText:hover {
+        color: #fff;
+    }
+</style>
+@* <div class="offcanvas-header justify-content-center">
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div> *@
+<div class="offcanvas-body">
+    <div class="order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+            <span class="badge bg-primary rounded-circle pt-2">Your cart:@await Component.InvokeAsync("CartCountVC", new { userid = Convert.ToInt64(Context.Session.GetString("UserId")) })</span>
+        </h4>
+        <table class="table table-hover w-100">
+            <tr>
+                @await Component.InvokeAsync("PetAddVC", new { userid = Convert.ToInt64(Context.Session.GetString("UserId")) })
+            </tr>
+            <tr>
+                @await Component.InvokeAsync("FoodAddVC", new { userid = Convert.ToInt64(Context.Session.GetString("UserId")) })
+            </tr>
+            <tr>
+                @await Component.InvokeAsync("ProductAddVC", new { userid = Convert.ToInt64(Context.Session.GetString("UserId")) })
+            </tr>
+            <tr>
+                <table class="table">
+                    @{
+                        decimal? total = 0;
+                    }
+                    <tr style="background-color:#f9f3ec;color:#000;">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td> </td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                       
+
+                        <td>Total Amount</td>
+                        <td>
+                            <td>
+                                @{
+                                    decimal total1 = Convert.ToInt64(@TempData["totalpet"]);
+                                    decimal total2 = Convert.ToInt64(@TempData["totalfood"]);
+                                    decimal total3 = Convert.ToInt64(@TempData["totalproduct"]);
+                                    total += total1;
+                                    total += total2;
+                                    total += total3;
+                                }
+                          
+                               @total
+                            
+                        </td> 
+                        <td></td>
+                    </tr>
+                </table>
+                <table class="table">
+                    <tr style="background-color:#f9f3ec;color:#000;">
+
+                        <td colspan="11">
+                            <form asp-action="CheckOut" asp-controller="Cart" method="post">
+                                Payment Mode:
+                                <select class="filter-categories border-0 mb-0 me-5" name="PaymentMode" asp-items="@Html.GetEnumSelectList<PaymentEnum>()">
+                                    <option value="0"> Select Payment</option>
+                                </select>
+
+
+                                <button class=" btn btn-primary btn-sm" type="submit"><span>MakePayment</span></button>
+                            </form>
+
+                        </td>
+                    </tr>
+                </table>
+            </tr>
+            <tr>
+                <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+            </tr>
+        </table>
+      
+         
+    </div>
+</div>

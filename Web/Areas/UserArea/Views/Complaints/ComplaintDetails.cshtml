@@ -1,0 +1,65 @@
+﻿@model ComplaintVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title absolute-center">Solution Details  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data">
+
+            <div class="row">
+                <div class="col-sm-2 col-md-2 label"> Complaint Id:</div>
+                <div class="col-sm-9 col-md-10">@ViewBag.ComplaintID</div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Compalaint date:</div>
+                <div class="col-sm-9 col-md-10">@Model.ComplaintDate</div>
+            </div>   <hr />
+
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Complaint Desc :</div>
+                <div class="col-sm-9 col-md-10">@Model.ComplaintDesc</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Order No :</div>
+                <div class="col-sm-9 col-md-10">@Model.OrderId</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Product No :</div>
+                <div class="col-sm-9 col-md-10">@Model.ProductId</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label"> Product Type :</div>
+                <div class="col-sm-9 col-md-10">@Enum.GetName(typeof(ProductEnum), Model.ProductType)</div>
+            </div> <hr />
+            <div class="row">
+                @if (Model.ProductType == (int)ProductEnum.Pet)
+                {
+                    <div class="col-sm-3 col-md-2 label"> Pet Name :</div>
+                    <div class="col-sm-9 col-md-10">@Model.PetName</div>
+                  
+                }
+                else if (Model.ProductType == (int)ProductEnum.PetFood)
+                {
+                    <div class="col-sm-3 col-md-2 label"> Food Name :</div>
+                    <div class="col-sm-9 col-md-10">@Model.FoodName</div>
+                }
+                else if (Model.ProductType == (int)ProductEnum.PetProduct)
+                {
+                    <div class="col-sm-3 col-md-2 label"> Product Name :</div>
+                    <div class="col-sm-9 col-md-10">@Model.ProductName</div>
+                }
+            </div>
+            <button class="btn btn-gradient-primary"><a asp-action="Index" asp-controller="Complaints">Back</a></button>
+
+        </form>
+    </div>
+</div>
+

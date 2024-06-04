@@ -1,0 +1,64 @@
+﻿@model PetVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title absolute-center" >Details  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="Edit" method="post">
+            <div>
+                <input type="hidden" @Context.Session.GetString("StoreId") />
+                <input type="hidden" asp-for="PetId" />
+                <input type="hidden" asp-for="ProductId" />
+
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-md-2 label">Pet Name:</div>
+                <div class="col-sm-9 col-md-10">@Model.PetName</div>
+            </div>
+            <hr/>
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Pet Age:</div>
+                <div class="col-sm-9 col-md-10">@Model.Age</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Pet Gender:</div>
+                <div class="col-sm-9 col-md-10">@Enum.GetName(typeof(GenderEnum), @Model.Gender)</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Product Type :</div>
+                <div class="col-sm-9 col-md-10">@Enum.GetName(typeof(ProductEnum), @Model.ProductType)</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Pet Type</div>
+                <div class="col-sm-9 col-md-10"> @Model.PetTypeName</div>   
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Pet Family :</div>
+                <div class="col-sm-9 col-md-10">@Model.PetFamilyName</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Pet Description :</div>
+                <div class="col-sm-9 col-md-10"> @Model.PetDesc</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-2 label">Product Price :</div>
+                <div class="col-sm-9 col-md-10"> @Model.ProductPrice</div>
+            </div>   <hr />
+            <div class="row">
+                <div class="col-sm-3 col-md-6 label">Pet Photo :</div>
+                <div class="col-sm-9 col-md-10">
+                <img src="@Model.PhotoPath" width="100" height="100" />
+                </div>
+            </div>
+         <button class="btn btn-gradient-primary"><a asp-action="Index" asp-controller="Pet">Back To List</a></button>
+          
+        </form>
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-info">@TempData["Message"]</div>
+            }
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <input type="hidden" />
+                <a>
+                    <button onclick="neworder()" type="button" class="btn btn-outline-primary">
+                        New Orders
+                    </button>
+                </a>
+                <a>
+                    <button onclick="dispatchorder()" type="button" class="btn btn-outline-primary">
+                        Dispatch Orders
+                    </button>
+                </a>
+
+            </div>
+            <div>
+            </div>
+            <div id="checkneworder" style="display:none;">
+                @await Component.InvokeAsync("NewOrdersUserVC", new { userid = Convert.ToInt64(@Context.Session.GetString("UserId")) })
+            </div>
+            <div id="checkdispatchorder" style="display:none;">
+                @await Component.InvokeAsync("DispatchOrdersUserVC", new { userid = Convert.ToInt64(@Context.Session.GetString("UserId")) })
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    function neworder() {
+        document.getElementById("checkneworder").style = "display:block;";
+        document.getElementById("checkdispatchorder").style = "display:none;";
+    }
+    function dispatchorder() {
+        document.getElementById("checkneworder").style = "display:none;";
+        document.getElementById("checkdispatchorder").style = "display:block;";
+    }
+
+</script>

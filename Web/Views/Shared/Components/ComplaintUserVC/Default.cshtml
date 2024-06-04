@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ComplaintVM>
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            <h4 class="card-title">Orders List</h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+
+                            <th> #</th>
+                            <th>Complaint No</th>
+                            <th>Complaint Date</th>
+                            <th>Complaint Description</th>
+                            <th>  Order No</th>
+                            <th>Product No</th>
+                            <th>Product Type</th>
+                            <th>Product Name</th>
+                            <th> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int srno = 1;
+                        }
+                        @foreach (var temp in Model)
+                        {
+                            <tr>
+
+                                <td>@srno</td>
+                                <td>@temp.ComplaintId</td>
+                                <td>@temp.ComplaintDate.ToString("dd-mm-yyyy")</td>
+                                <td>@temp.ComplaintDesc</td>
+                                <td>@temp.OrderId</td>
+                                <td>@temp.ProductId</td>
+                                <td>@Enum.GetName(typeof(ProductEnum), temp.ProductType)</td>
+                                @if (temp.ProductType == (int)ProductEnum.Pet)
+                                {
+                                    <td>  @temp.PetName</td>
+                                }
+                                else if (temp.ProductType == (int)ProductEnum.PetFood)
+                                {
+                                    <td>  @temp.FoodName</td>
+                                }
+                                else if (temp.ProductType == (int)ProductEnum.PetProduct)
+                                {
+                                    <td>
+                                        @temp.ProductName
+                                    </td>
+                                }
+                                <td> <a class="btn btn-gradient-info btn-rounded btn-fw" asp-controller="Complaints" asp-action="ComplaintDetails" asp-route-id="@temp.ComplaintId">ViewComplaint </a></td>
+                            </tr>
+                            srno++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>

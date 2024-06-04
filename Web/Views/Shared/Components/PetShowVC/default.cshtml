@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CartVM>
+<style>
+    #addCartBtn:hover {
+        background-color: #000;
+    }
+
+    #cartText:hover {
+        color: #fff;
+    }
+</style>
+
+
+
+        <table class="table table-hover w-100 table-bordered">
+            <thead>
+
+                <tr>
+
+                    <th> #</th>
+                    <th>Pet Icons</th>
+                    <th>Pet Name</th>
+                    <th>Age</th>
+                    <th> Gender</th>
+                    <th>PetTypeName</th>
+                    <th>PetFamilyName</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                   
+                </tr>
+            </thead>
+            <tbody >
+                @{
+                    int srno = 1;
+                    decimal? amount = 0, totalamount = 0;
+                }
+                @foreach (var temp in Model)
+                {
+
+                    <tr>
+                        <td>@srno</td>
+                        <td>
+                            <img src="@temp.PhotoPath" width="100" height="100" />
+                        </td>
+                        <td>@temp.PetName</td>
+                        <td>@temp.Age</td>
+                        <td>@Enum.GetName(typeof(GenderEnum), temp.Gender)</td>
+                        <td>@temp.PetTypeName</td>
+                        <td>@temp.PetFamilyName</td>
+                        <td>@temp.Price</td>
+                        <td>@temp.Quantity</td>
+                        <td>
+                            @{
+                                amount = temp.Quantity * temp.Price;
+                                totalamount += amount;
+                            }
+                            @amount
+                        </td>
+                      
+                    </tr>
+                    srno++;
+                }
+               
+            </tbody>
+        </table>

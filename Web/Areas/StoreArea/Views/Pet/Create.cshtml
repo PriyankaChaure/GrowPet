@@ -1,0 +1,73 @@
+﻿@model PetVM
+<script src="~/jquery/jquery.js"></script>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Create  </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" enctype="multipart/form-data" asp-action="Create" method="post">
+            <div><input type ="hidden" @Context.Session.GetString("StoreId")</div>
+            <div class="form-group">
+                <label class="form-label"> Pet Name</label>
+                <input asp-for="PetName" class="form-control" placeholder="PetName">
+                <span asp-validation-for="PetName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Age</label>
+                <input asp-for="Age" class="form-control" placeholder="Age">
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Gender</label>
+                <select class="form-select" name="Gender"  asp-items="@Html.GetEnumSelectList<GenderEnum>()">
+                    <option value="0">Select Gender</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry"> Product</label>
+                <select class="form-select" name="ProductType" asp-items="@Html.GetEnumSelectList<ProductEnum>()">
+                    <option value="0">Select Product</option>
+                </select>
+                <span asp-validation-for="ProductType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label>Select PetType</label>
+                <select class="form-select" name="PetTypeId" asp-items="@ViewBag.PetTypeId">
+                    <option >Select PetType</option>
+                </select>
+                <span asp-validation-for="PetTypeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectState">Select PetFamily</label>
+                <select class="form-select" name="PetFamilyId" asp-items="@ViewBag.PetFamilyId">
+                    <option value="0">Select PetFamily</option>
+                </select>
+                <span asp-validation-for="PetFamilyId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> PetDesc</label>
+                <textarea asp-for="PetDesc" class="form-control" placeholder="PetDescription"></textarea>
+                <span asp-validation-for="PetDesc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label"> Pet Price</label>
+                <input asp-for="ProductPrice" name="ProductPrice" class="form-control" placeholder="Price">
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Pet Photo</label>
+                <input type="file" name="ActualFile" asp-for="ActualFile" class="form-control" />
+                <span asp-validation-for="ActualFile" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary me-2">Create</button>
+            <button class="btn btn-light"><a asp-action="Index" asp-controller="Pet">Cancel</a></button>
+        </form>
+    </div>
+</div>

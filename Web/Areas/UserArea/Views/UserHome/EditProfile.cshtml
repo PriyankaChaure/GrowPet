@@ -1,0 +1,120 @@
+﻿@model UserVM
+
+<script src="~/jquery/jquery.js"></script>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Edit Profile </h4>
+
+        <div>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-info">@ViewBag.Message</div>
+            }
+        </div>
+
+        <form class="forms-sample" asp-action="EditProfile" asp-controller="UserHome" asp-area="UserArea" method="post">
+          
+            <div class="form-group">
+                <label class="form-label">First Name</label>
+                <input asp-for="FirstName" class="form-control" id="exampleInputEmail1" placeholder="Old Password">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Last Name</label>
+                <input asp-for="LastName" class="form-control" id="exampleInputEmail1" placeholder="Old Password">
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Address</label>
+                <input asp-for="Address" class="form-control" id="exampleInputPassword1" placeholder="New Password">
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Email Id</label>
+                <input asp-for="EmailId" class="form-control" id="exampleInputConfirmPassword1" placeholder="Confirm Password">
+                <span asp-validation-for="EmailId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputConfirmPassword1">Mobile No</label>
+                <input asp-for="MobileNo" class="form-control" id="exampleInputConfirmPassword1" placeholder="Confirm Password">
+                <span asp-validation-for="MobileNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCountry">Select Country</label>
+                <select class="form-control" id="Country" asp-for="CountryId" asp-items="@ViewBag.CountryId" >
+                    <option value="0">Select Country</option>
+                </select>
+                <span asp-validation-for="CountryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectState">Select State</label>
+                <select class="form-control" id="State" asp-for="StateId" asp-items="@ViewBag.StateId">
+                    <option value="0">Select State</option>
+                </select>
+                <span asp-validation-for="StateId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="exampleSelectCity">Select City</label>
+                <select class="form-control" id="City" asp-for="CityId" asp-items="@ViewBag.CityId" >
+                    <option value="0">Select City</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-gradient-primary me-2">Edit Profile</button>
+            <button class="btn btn-light"><a asp-action="Index">Cancel</a></button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+   
+        $("#Country").change(function () {
+         
+            $.ajax({
+                url: "/UserArea/UserHome/GetStateJson/"+$("#Country").val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    //alert(JSON.stringify(result));
+                    $("#State").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        var str = "<option value='" + result[i].stateId + "'>" + result[i].stateName + "</option>";
+                        $("#State").append(str);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+           
+        });
+
+
+
+        $("#State").change(function () {
+
+            $.ajax({
+                url: "/UserArea/UserHome/GetCityJson/" + $("#State").val(),
+                type: "Get",
+                contentType: "application/json",
+                success: function (result) {
+                    //alert(JSON.stringify(result));
+                    $("#City").empty();
+                    for (var i = 0; i < result.length; i++) {
+                        var str = "<option value='" + result[i].cityId + "'>" + result[i].cityName + "</option>";
+                        $("#City").append(str);
+                    }
+                },
+                error: function (err) {
+                    alert(JSON.stringify(err));
+                }
+            });
+
+        });
+
+    });
+  
+</script>
+
+@* <a href="c:\ankit\mini\growpet\web\areas\storearea\controllers\storehomecontroller.cs">c:\ankit\mini\growpet\web\areas\storearea\controllers\storehomecontroller.cs</a> *@

@@ -1,0 +1,113 @@
+﻿@model IEnumerable<Pet>
+<section id="categories">
+    <div class="container-fluid">
+        <div class="row ">
+            <div class=" text-center">
+                <section id="clothing" class="overflow-hidden">
+                    <div class="container-fluid">
+                        <div class="section-header d-md-flex justify-content-between align-items-center">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>  @TempData["Message"]</div>
+                                        <div class="btn-group" role="group" aria-label="Basic example">
+                                            <table class="table table-hover w-100">
+                                                <thead>
+                                                    <tr style="background-color:#f9f3ec;color:#000;">
+                                                        <form asp-action="SearchByProperty" method="get">
+                                                        <th colspan="4">
+
+                                                            <div class="form-group">
+                                                                <label>Select PetType</label>
+                                                                <select  class="form-select" name="type" asp-items="@ViewBag.PetTypeId">
+                                                                    <option >Select PetType</option>
+                                                                </select>
+
+                                                            </div>
+
+                                                        </th>
+                                                        <th colspan="4">
+                                                            <div class="form-group">
+                                                                <label for="exampleSelectState">Select PetFamily</label>
+                                                                <select  class="form-select" name="family" asp-items="@ViewBag.PetFamilyId">
+                                                                    <option>Select PetFamily</option>
+                                                                </select>
+
+                                                            </div>
+                                                        </th>
+                                                        <th colspan="1">
+                                                            <div class="form-group">
+                                                                <button  class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+                                                                    Search
+                                                                </button>
+                                                            </div>
+                                                        </th>
+                                                        </form>
+                                                        
+                                                    </tr>
+                                                    <tr style ="background-color:#f9f3ec;color:#000;">
+
+                                                        <th> #</th>
+                                                        <th>Pet Icons</th>
+                                                        <th>Pet Name</th>
+                                                        <th>Age</th>
+                                                        <th> Gender</th>
+                                                           <th>PetTypeName</th>
+                                                        <th>PetFamilyName</th>
+                                                        @*   <th>Pet Description</th>*@
+                                                    
+                                                        <th>Price</th>
+
+                                                        <th> Actions</th>
+                                                    </tr> 
+                                                </thead>
+                                                <tbody style="background-color:#f9f3ec;color:#000;">
+                                                    @{
+                                                        int srno = 1;
+                                                    }
+                                                    @foreach (var temp in Model)
+                                                    {
+
+                                                        <tr>
+                                                            <td>@srno</td>
+                                                            <td>
+                                                                <img src="@temp.PhotoPath" width="100" height="100" />
+                                                            </td>
+                                                            <td>@temp.PetName</td>
+                                                            <td>@temp.Age</td>
+                                                            <td>@Enum.GetName(typeof(GenderEnum), temp.Gender)</td>
+                                                            <td>@temp.PetType.PetTypeName</td>
+                                                            <td>@temp.PetFamily.PetFamilyName</td>
+                                                           
+                                                            <td>@temp.Product.ProductPrice</td>
+
+                                                        
+                                                            <td>
+                                                                <a  id="addCartBtn" asp-action="AddToCart" asp-controller="Cart" asp-route-petid="@temp.PetId" asp-route-storeid="@temp.Product.StoreId" class="btn  btn-sm">
+                                                                    <h6 id="cartText"> AddToCart</h6>
+
+                                                                </a>
+                                                               
+                                                                <a id="addCartBtn" asp-action="AddReview" asp-controller="Review" class="btn btn-sm">
+                                                                    <h6 id="cartText"> Review</h6>
+
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                        srno++;
+
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+               
+            </div>
+        </div>
+    </div>
+</section>

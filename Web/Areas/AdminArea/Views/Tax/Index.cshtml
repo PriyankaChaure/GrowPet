@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Tax>
+
+<div class="col-lg-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+           
+            <h4 class="card-title">Country List</h4>
+            <a class="btn btn-gradient-primary btn-rounded btn-fw" asp-action="Create" asp-controller="Tax"> Create </a>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        
+                        <th> #</th>
+                       <th>Tax Percentage</th>
+                        <th>HSNSA No</th>
+                        <th> Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int srno = 1;
+                    }
+                    @foreach (var temp in Model)
+                    {
+                    <tr>
+                       
+                        <td>@srno</td>
+                        <td>@temp.TaxPercentage</td>
+                            <td>@temp.HSNSACNo</td>
+                        <td>
+                             <a class="btn btn-gradient-info btn-rounded btn-fw" asp-action="Edit" asp-route-id="@temp.TaxId">Edit</a>
+                             <a class="btn btn-gradient-danger btn-rounded btn-fw" asp-action="Delete" asp-route-id="@temp.TaxId">Delete</a>
+                        </td>
+ 
+                    </tr>
+                        srno++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
